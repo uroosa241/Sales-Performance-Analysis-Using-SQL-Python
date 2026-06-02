@@ -1,119 +1,235 @@
-<h1 align="center">End-to-End Data Analytics Project: Python + SQL</h1>
+ Sales Performance Analysis Using SQL & Python
 
-Welcome to my end-to-end data analytics project! This repository showcases a complete data analysis workflow using Python and SQL, focused on **retail order** data. It highlights my ability to handle real-world datasets, clean and preprocess data, and derive actionable insights, making it a perfect fit for data analyst positions.
+ Project Overview
 
-**<h3>Project Overview</h3>**
+This project analyzes retail order data using SQL and Python (Pandas) to generate business insights related to revenue, profit, customer segments, products, regions, discounts, and sales trends.
 
-This project demonstrates how to work with large datasets, from extraction and cleaning to analysis and visualization.
+The objective is to demonstrate data analysis skills by answering real-world business questions through SQL queries and applying the Pareto Principle (80/20 Rule) using Python.
 
-**<h3>Here's a high-level overview:</h3>**
+---
 
-**1.Data Extraction:** Leveraged the Kaggle API to download datasets programmatically.
+ Dataset Structure
 
-**2.Data Cleaning and Preprocessing:** Used Python and Pandas to handle missing values, normalize data, and prepare it for analysis.
+The dataset contains order-level information with the following fields:
 
-**3.Database Integration:** Loaded the cleaned data into an SQL Server database for querying and analysis.
+| Column           | Description                   |
+| ---------------- | ----------------------------- |
+| order_id         | Unique order identifier       |
+| order_date       | Date of order                 |
+| ship_mode        | Shipping method               |
+| segment          | Customer segment              |
+| country          | Country                       |
+| city             | City                          |
+| state            | State                         |
+| postal_code      | Postal code                   |
+| region           | Sales region                  |
+| category         | Product category              |
+| sub_category     | Product sub-category          |
+| product_id       | Product identifier            |
+| cost_price       | Product cost price            |
+| list_price       | Selling price before discount |
+| quantity         | Quantity sold                 |
+| discount_percent | Discount applied (%)          |
 
-**4.Data Analysis:** Conducted exploratory data analysis (EDA) and derived insights using SQL queries.
+---
 
-**<h3>Project Architecture</h3>**
+ Business Metrics Calculated
 
-**Workflow Breakdown:**
+ Revenue
 
-**Kaggle API:** Accessed datasets efficiently without manual downloads.
+```sql
+Revenue = list_price × quantity × (1 - discount_percent/100)
+```
 
-**Python + Pandas:** Performed data cleaning, including:
+ Profit
 
-1.Handling missing data
+```sql
+Profit = Revenue - (cost_price × quantity)
+```
 
-2.Formatting and transforming columns
+---
 
-3.Removing duplicates
+ SQL Analysis Performed
 
-**SQL Server:** Loaded the cleaned dataset into SQL Server and conducted in-depth analysis using SQL queries.
+ Revenue & Profit Analysis
 
-**Data Analysis: Used SQL to:**
+ Revenue generated per order
+ Profit generated per order
+ Top 10 most profitable orders
+ Loss-making orders
 
-1.Aggregate data
+ Customer Segment Analysis
 
-2.Identify trends
+ Revenue by segment
+ Average order value by segment
+ Segment contribution percentage
+ Most profitable segment in each region
 
-3.Generate insights for decision-making
+ Regional Analysis
 
-**Skills Demonstrated**
+ Revenue by region
+ Revenue per order by state
+ Profit by city
+ Loss-making regions for Furniture category
 
-**Python:** Proficient use of libraries like Pandas for data manipulation and analysis.
+ Product Analysis
 
-**SQL:** Strong command over SQL queries for data aggregation, filtering, and exploration.
+ Top-selling products by quantity
+ Most profitable sub-categories
+ Products generating high revenue but negative profit
+ Product revenue ranking within categories
 
-**ETL Workflow:** Implemented a seamless Extract-Transform-Load process.
+ Discount Analysis
 
-**Problem-Solving:** Identified and resolved data quality issues to ensure reliable analysis.
+ Average discount by category
+ Profitability by discount bucket
+ High-discount profitable orders
+ Impact of discounts on average profit
 
-**<h3>How to Run This Project</h3>**
+ Time Series Analysis
 
-**Clone this repository:**
+ Monthly revenue trends
+ Yearly revenue trends
+ Most profitable month
+ Monthly Technology category revenue
+ Daily revenue with running totals
 
-git clone https://github.com/yourusername/yourrepository.git
+ Shipping Analysis
 
-**Install the required Python libraries:**
+ Revenue by shipping mode
+ Profit by shipping mode
+ Detection of invalid shipping modes
 
-pip install -r requirements.txt
+ Data Quality Checks
 
-Use the Kaggle API to download the dataset (instructions included in the notebook).
+ Missing or invalid values
+ Zero pricing issues
+ Discount validation
+ Duplicate order detection
 
-**Run the Python scripts for data cleaning and preprocessing:**
+ Advanced SQL Techniques Used
 
-1.Order Data Analysis.ipynb (Jupyter Notebook for detailed cleaning steps)
+ Window Functions
+ RANK()
+ Running Totals
+ PARTITION BY
+ Aggregate Functions
+ HAVING Clauses
+ CASE Statements
+ Subqueries
 
-2.orders data analysis.py (Python script version for automation)
+---
 
-3.Load the cleaned data into an SQL Server database (setup instructions provided).
+ Pareto Analysis (80/20 Rule)
 
-4.Execute the SQL queries to analyze the data using SQLQuery3.sql.
+ Objective
 
-**<h3>Files in the Repository</h3>**
+Identify the small percentage of products responsible for the majority of revenue.
 
-**Order Data Analysis.ipynb:** Jupyter notebook for data cleaning and preprocessing.
+The Pareto Principle states:
 
-**orders data analysis.py:** Python script to clean and prepare the data.
+> Approximately 80% of revenue often comes from 20% of products.
 
-**SQLQuery3.sql:** Collection of SQL queries for data analysis.
+ Python Implementation
 
-**orders.csv:** Raw dataset containing retail order information.
+```python
+product_revenue = df.groupby("product id")["total_revenue"].sum()
 
-**project architecture.png:** Visual representation of the project workflow.
+product_revenue = product_revenue.sort_values(ascending=False)
 
-**README.md:** Project documentation.
+total_revenue = product_revenue.sum()
 
-**<h3>Key Insights from the Analysis</h3>**
+cumulative_revenue = product_revenue.cumsum()
 
-1.Identified top-selling products and their revenue contributions.
+cumulative_percent = (cumulative_revenue / total_revenue)  100
 
-2.Analyzed customer purchasing patterns to inform marketing strategies.
+pareto_df = pd.DataFrame({
+    "Revenue": product_revenue,
+    "Cumulative Revenue": cumulative_revenue,
+    "Cumulative %": cumulative_percent
+})
 
-3.Determined peak sales periods for inventory management optimization.
+top_20_products = product_revenue.head(
+    int(len(product_revenue)  0.2)
+)
+```
 
-4.Segmented customers based on order frequency and value for targeted promotions.
+ Output Generated
 
-**Why This Project Matters**
+ Product revenue ranking
+ Cumulative revenue contribution
+ Cumulative revenue percentage
+ Top 20% revenue-generating products
 
-This project demonstrates a solid understanding of the data analytics lifecycle, from raw data to actionable insights. It showcases my technical skills, attention to detail, and ability to work with multiple tools and technologies—all essential for a career in data analytics.
+ Business Value
 
-**Let's Connect**
+Pareto Analysis helps organizations:
 
-Feel free to explore the project and reach out with any questions or feedback. I'm excited to connect with like-minded professionals and recruiters in the data analytics field.
+ Focus marketing efforts on high-value products
+ Optimize inventory management
+ Improve profitability
+ Prioritize product investments
+ Identify key revenue drivers
 
-**LinkedIn:** https://www.linkedin.com/in/devisuhitha/
+---
 
-**Email:** cdevisuhitha@gmail.com
+ Technologies Used
+
+ SQL
+ PostgreSQL / MySQL Compatible Queries
+ Python
+ Pandas
+ Jupyter Notebook
+
+---
+
+ Key Insights Generated
+
+ Most profitable customer segments
+ Highest-performing regions
+ Best-selling products
+ Impact of discounts on profit margins
+ Revenue trends over time
+ Shipping mode effectiveness
+ Top revenue-contributing products using Pareto Analysis
+
+---
+
+ Project Structure
+
+```text
+├── data/
+│   └── orders.csv
+│
+├── sql/
+│   ├── revenue_analysis.sql
+│   ├── profit_analysis.sql
+│   ├── segment_analysis.sql
+│   ├── regional_analysis.sql
+│   ├── discount_analysis.sql
+│   └── time_series_analysis.sql
+│
+├── notebooks/
+│   └── pareto_analysis.ipynb
+│
+├── README.md
+└── requirements.txt
+```
+
+---
+
+ Future Improvements
+
+ Interactive dashboard using Power BI or Tableau
+ Customer lifetime value analysis
+ Forecasting future sales
+ Product recommendation system
+ Automated reporting pipeline
 
 
 
+ Author
 
-
-
-
-
+Uroosa Khan
 
 

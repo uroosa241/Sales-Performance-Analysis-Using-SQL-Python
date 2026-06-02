@@ -1,211 +1,196 @@
- Sales Performance Analysis Using SQL & Python
 
- Project Overview
 
-This project analyzes retail order data using SQL and Python (Pandas) to generate business insights related to revenue, profit, customer segments, products, regions, discounts, and sales trends.
+Sales Performance Analysis Using SQL & Python
 
-The objective is to demonstrate data analysis skills by answering real-world business questions through SQL queries and applying the Pareto Principle (80/20 Rule) using Python.
+Overview
+This project performs an end-to-end analysis of retail sales data using SQL and Python (Pandas). The goal is to uncover actionable business insights related to revenue, profitability, customer behavior, product performance, discount effectiveness, regional sales trends, and operational efficiency.
+In addition to SQL-based business analysis, the project applies the Pareto Principle (80/20 Rule) in Python to identify the products that contribute most significantly to overall revenue.
 
----
 
- Dataset Structure
+ Project Objectives
+•	Analyze sales performance across products, regions, and customer segments.
+•	Measure revenue and profit at multiple business levels.
+•	Evaluate the impact of discounts on profitability.
+•	Identify top-performing and underperforming products.
+•	Detect data quality issues and anomalies.
+•	Perform time-series sales analysis.
+•	Apply Pareto Analysis to identify key revenue-generating products.
+•	Demonstrate practical SQL and Python skills used in real-world business intelligence projects.
 
-The dataset contains order-level information with the following fields:
+Business Metrics
+Revenue
+Revenue is calculated as:
+Revenue = List Price × Quantity × (1 − Discount %)
+Profit
+Profit is calculated as:
+Profit = Revenue − (Cost Price × Quantity)
 
-| Column           | Description                   |
-| ---------------- | ----------------------------- |
-| order_id         | Unique order identifier       |
-| order_date       | Date of order                 |
-| ship_mode        | Shipping method               |
-| segment          | Customer segment              |
-| country          | Country                       |
-| city             | City                          |
-| state            | State                         |
-| postal_code      | Postal code                   |
-| region           | Sales region                  |
-| category         | Product category              |
-| sub_category     | Product sub-category          |
-| product_id       | Product identifier            |
-| cost_price       | Product cost price            |
-| list_price       | Selling price before discount |
-| quantity         | Quantity sold                 |
-| discount_percent | Discount applied (%)          |
+SQL Business Questions Solved
+Revenue & Profit Analysis
+1.	Calculate revenue for each order.
+2.	Calculate profit for each order.
+3.	Find the top 10 most profitable orders.
+4.	Identify loss-making orders.
+Insights Generated
+•	High-value orders contributing most profit.
+•	Orders generating losses despite sales.
+•	Profitability patterns across transactions.
 
----
+Customer Segment Analysis
+5.	Calculate total revenue by customer segment.
+6.	Calculate average order value by customer segment.
+7.	Determine each segment’s share of total orders.
+8.	Identify the most profitable segment in each region.
+Insights Generated
+•	Most valuable customer segments.
+•	Segment purchasing behavior.
+•	Regional segment performance.
 
- Business Metrics Calculated
+Regional & Geographic Analysis
+9.	Calculate revenue by region.
+10.	Compute revenue per order for each state.
+11.	Identify the most profitable cities.
+12.	Find regions where Furniture sales generate losses.
+Insights Generated
+•	Best-performing regions.
+•	High-profit geographic markets.
+•	Areas requiring business improvement.
 
- Revenue
+Product Performance Analysis
+13.	Identify top 5 products by quantity sold.
+14.	Calculate profit by sub-category.
+15.	Find products generating high revenue but negative profit.
+16.	Rank products by revenue within each category.
+Insights Generated
+•	Best-selling products.
+•	Most profitable product categories.
+•	Revenue drivers and profit leakages.
 
-```sql
-Revenue = list_price × quantity × (1 - discount_percent/100)
-```
+Discount Analysis
+17.	Calculate average discount by category.
+18.	Identify products sold at cost price.
+19.	Analyze profit across discount ranges.
+20.	Find profitable orders with discounts above 3%.
+21.	Evaluate average profit by discount percentage.
+Insights Generated
+•	Impact of discounting strategies.
+•	Optimal discount ranges.
+•	Profitability versus discount trade-offs.
 
- Profit
+Time Series Analysis
+22.	Calculate monthly revenue trends.
+23.	Calculate yearly revenue trends.
+24.	Identify the most profitable month.
+25.	Analyze monthly revenue for Technology products.
+26.	Calculate daily revenue and cumulative revenue.
+Insights Generated
+•	Seasonal sales patterns.
+•	Growth trends over time.
+•	Peak revenue periods.
 
-```sql
-Profit = Revenue - (cost_price × quantity)
-```
+Shipping Performance Analysis
+27.	Calculate revenue by shipping mode.
+28.	Calculate profit by shipping mode.
+29.	Identify invalid shipping methods.
+Insights Generated
+•	Most profitable shipping options.
+•	Operational efficiency insights.
 
----
+Data Quality & Validation
+30.	Identify records containing:
+•	Zero cost price
+•	Zero list price
+•	Missing discounts
+•	Invalid discounts (>100%)
+31.	Detect duplicate transactions based on:
+•	Order Date
+•	Product ID
+•	City
+Insights Generated
+•	Data integrity issues.
+•	Potential data cleaning requirements.
 
- SQL Analysis Performed
+Advanced SQL Analytics
+32.	Calculate city-wise revenue contribution percentages.
+33.	Compare individual order profit with segment average profit.
+34.	Identify top-performing Region–Category–Segment combinations.
+35.	Rank customer segments by regional profitability.
+36.	Calculate cumulative revenue using window functions.
+SQL Concepts Demonstrated
+•	SELECT Statements
+•	Aggregate Functions
+•	GROUP BY
+•	ORDER BY
+•	CASE Statements
+•	HAVING Clauses
+•	Subqueries
+•	Window Functions
+•	RANK()
+•	PARTITION BY
+•	Running Totals
+•	Revenue & Profit Calculations
+•	Data Validation Queries
 
- Revenue & Profit Analysis
+ Python Analysis
+Pareto Analysis (80/20 Rule)
+Objective
+Determine whether a small percentage of products generates the majority of total revenue.
+The Pareto Principle suggests:
+Approximately 80% of business outcomes are often driven by 20% of inputs.
+For retail businesses, this typically means that a small percentage of products generates most revenue.
 
- Revenue generated per order
- Profit generated per order
- Top 10 most profitable orders
- Loss-making orders
+Python Questions Solved
+1.	Calculate total revenue generated by each product.
+2.	Rank products by revenue contribution.
+3.	Calculate overall business revenue.
+4.	Compute cumulative revenue.
+5.	Calculate cumulative revenue percentage.
+6.	Create a Pareto Analysis table.
+7.	Identify top 20% revenue-generating products.
+8.	Verify the 80/20 distribution.
+9.	Identify key revenue-driving products.
+10.	Support inventory optimization decisions.
 
- Customer Segment Analysis
-
- Revenue by segment
- Average order value by segment
- Segment contribution percentage
- Most profitable segment in each region
-
- Regional Analysis
-
- Revenue by region
- Revenue per order by state
- Profit by city
- Loss-making regions for Furniture category
-
- Product Analysis
-
- Top-selling products by quantity
- Most profitable sub-categories
- Products generating high revenue but negative profit
- Product revenue ranking within categories
-
- Discount Analysis
-
- Average discount by category
- Profitability by discount bucket
- High-discount profitable orders
- Impact of discounts on average profit
-
- Time Series Analysis
-
- Monthly revenue trends
- Yearly revenue trends
- Most profitable month
- Monthly Technology category revenue
- Daily revenue with running totals
-
- Shipping Analysis
-
- Revenue by shipping mode
- Profit by shipping mode
- Detection of invalid shipping modes
-
- Data Quality Checks
-
- Missing or invalid values
- Zero pricing issues
- Discount validation
- Duplicate order detection
-
- Advanced SQL Techniques Used
-
- Window Functions
- RANK()
- Running Totals
- PARTITION BY
- Aggregate Functions
- HAVING Clauses
- CASE Statements
- Subqueries
-
----
-
- Pareto Analysis (80/20 Rule)
-
- Objective
-
-Identify the small percentage of products responsible for the majority of revenue.
-
-The Pareto Principle states:
-
-> Approximately 80% of revenue often comes from 20% of products.
-
- Python Implementation
-
-```python
-product_revenue = df.groupby("product id")["total_revenue"].sum()
-
-product_revenue = product_revenue.sort_values(ascending=False)
-
-total_revenue = product_revenue.sum()
-
-cumulative_revenue = product_revenue.cumsum()
-
-cumulative_percent = (cumulative_revenue / total_revenue)  100
-
-pareto_df = pd.DataFrame({
-    "Revenue": product_revenue,
-    "Cumulative Revenue": cumulative_revenue,
-    "Cumulative %": cumulative_percent
-})
-
-top_20_products = product_revenue.head(
-    int(len(product_revenue)  0.2)
-)
-```
-
- Output Generated
-
- Product revenue ranking
- Cumulative revenue contribution
- Cumulative revenue percentage
- Top 20% revenue-generating products
-
- Business Value
-
-Pareto Analysis helps organizations:
-
- Focus marketing efforts on high-value products
- Optimize inventory management
- Improve profitability
- Prioritize product investments
- Identify key revenue drivers
-
----
+Python Concepts Demonstrated
+•	Pandas DataFrames
+•	GroupBy Operations
+•	Aggregation Functions
+•	Sorting & Ranking
+•	Cumulative Sum Calculations
+•	Percentage Calculations
+•	Business Intelligence Analysis
+•	Pareto Principle (80/20 Rule)
+•	Revenue Contribution Analysis
 
  Technologies Used
-
- SQL
- PostgreSQL / MySQL Compatible Queries
- Python
- Pandas
- Jupyter Notebook
-
----
-
- Key Insights Generated
-
- Most profitable customer segments
- Highest-performing regions
- Best-selling products
- Impact of discounts on profit margins
- Revenue trends over time
- Shipping mode effectiveness
- Top revenue-contributing products using Pareto Analysis
-
----
+SQL
+•	PostgreSQL
+•	MySQL-Compatible Queries
+Python
+•	Pandas
+•	NumPy
+•	Jupyter Notebook
+Data Analysis Techniques
+•	Revenue Analysis
+•	Profitability Analysis
+•	Customer Segmentation
+•	Product Performance Evaluation
+•	Pareto Analysis
+•	Time Series Analysis
+•	Data Validation
 
  Project Structure
-
-```text
+Sales-Performance-Analysis/
+│
 ├── data/
 │   └── orders.csv
 │
 ├── sql/
 │   ├── revenue_analysis.sql
 │   ├── profit_analysis.sql
-│   ├── segment_analysis.sql
+│   ├── customer_segment_analysis.sql
 │   ├── regional_analysis.sql
+│   ├── product_analysis.sql
 │   ├── discount_analysis.sql
 │   └── time_series_analysis.sql
 │
@@ -214,22 +199,20 @@ Pareto Analysis helps organizations:
 │
 ├── README.md
 └── requirements.txt
-```
 
----
-
- Future Improvements
-
- Interactive dashboard using Power BI or Tableau
- Customer lifetime value analysis
- Forecasting future sales
- Product recommendation system
- Automated reporting pipeline
-
-
+Key Business Insights
+•	Identified the highest revenue-generating products.
+•	Determined the most profitable customer segments.
+•	Evaluated the impact of discounts on profitability.
+•	Analyzed regional and city-level performance.
+•	Detected loss-making products and categories.
+•	Tracked monthly and yearly sales trends.
+•	Measured shipping mode effectiveness.
+•	Applied Pareto Analysis to identify critical products driving revenue.
 
  Author
-
 Uroosa Khan
 
+Data Analytics | SQL | Python | Business Intelligence
+This project demonstrates practical business problem-solving using SQL and Python through revenue analysis, profitability analysis, customer segmentation, and Pareto-based product performance evaluation.
 
